@@ -11,7 +11,10 @@ npm-debug.*
 web-build/
 
 # macOS
-.DS_Store
+**/.DS_Store
 
 # katching
 package-lock.json
+
+# server
+env/
