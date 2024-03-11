@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "katching",
+    "slug": "katching",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "968a1972-47e7-4d5f-9a8d-f1c48bdf196d"
+      }
+    }
+  }
+}
