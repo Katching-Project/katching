@@ -1,46 +1,50 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const basicStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   gradient: {
     flex: 1,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'black',
-    marginBottom: 20,
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "black",
+    marginBottom: "20%",
+    fontFamily: "Georgia",
   },
   inputContainer: {
-    width: '80%',
-    backgroundColor: 'white',
-    borderRadius: 20,
+    width: "80%",
+    height: "6%",
+    backgroundColor: "white",
+    borderRadius: 30,
     padding: 10,
     marginBottom: 20,
   },
   input: {
-    fontSize: 16,
-    color: 'black',
+    marginLeft: 15,
+    fontSize: 18,
+    color: "black",
+    fontFamily: "Georgia",
   },
   swipeArea: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0, // Position at the bottom of the screen
     left: 0,
     right: 0,
-    height: '30%',
-    justifyContent: 'flex-end', // Set swiping area to the end of the screen
-    alignItems: 'center',
-    paddingVertical: '10%'
+    height: "30%",
+    justifyContent: "flex-end", // Set swiping area to the end of the screen
+    alignItems: "center",
+    paddingVertical: "10%",
   },
   swipeText: {
     fontSize: 20,
-    fontFamily: 'Arial'
+    fontFamily: "Georgia",
   },
 });
