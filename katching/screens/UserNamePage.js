@@ -55,6 +55,10 @@ export default function UserNamePage() {
           title="Swipe Up"
           onPress={() => navigation.navigate("IdolGroupSelect")}
         />
+        <Button
+          title="IdolSelect"
+          onPress={() => navigation.navigate("IdolSelect")}
+        />
       </LinearGradient>
     </View>
   );
