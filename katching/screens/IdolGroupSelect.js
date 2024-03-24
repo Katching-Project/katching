@@ -1,89 +1,134 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { Button, Text, View } from "react-native";
-import { basicStyles } from "./styles/basicStyles";
+import IdolGroupCard from "../components/IdolGroupCard";
+import { idolGroupSelectStyles } from "./styles/idolGroupSelectStyle";
 
 const GRADIENT_COLOR_RANGE = ["#FFFFFF", "#13223F"];
 
 // temporary number of idol groups. Will update after backend API established
-const numButtons = 10;
+const numButtons = 4;
 
-// const [selectedGroups, setSelectedGroups] = useState([]);
+const idolGroups = [
+  {
+    name: "BlakPink",
+    sourcePath: require("../assets/girl1.jpg"),
+    isPressed: false,
+  },
+  {
+    name: "Le Sserafim",
+    sourcePath: require("../assets/girl2.jpg"),
+    isPressed: false,
+  },
+  {
+    name: "Ive",
+    sourcePath: require("../assets/girl3.jpg"),
+    isPressed: false,
+  },
+  {
+    name: "New Jeans",
+    sourcePath: require("../assets/girl4.jpg"),
+    isPressed: false,
+  },
+];
 
-// export const useSelectedGroups = () => {
-//   const [selectedGroups, setSelectedGroups] = useState([]);
-//   // Any additional functions related to selectedGroups can be defined here
-//   return { selectedGroups, setSelectedGroups };
-// };
+export default function IdolGroupSelect() {
+  const [selectedGroups, setSelectedGroups] = useState([]);
+  const [allButtonIsPressed, setallButtonIsPressed] = useState(false);
 
-// TOODO: need to import idol group images and names, then render buttons
-// Or we can hard code three versions: Male, Female, Both
-const renderIdolGroupButtons = () => {
-  const buttons = [];
-  for (let i = 0; i < numButtons; i += 2) {
+  const handleAllButtonPress = () => {
+    tempArray = [];
+    // if currently allButtonIsPressed == true, now we are deselecting all groups
+    if (allButtonIsPressed) {
+      setallButtonIsPressed(false);
+      for (let i = 0; i < numButtons; i += 1) {
+        idolGroups[i].isPressed = false;
+      }
+    } else {
+      // if currently allButtonIsPressed == false, now we are selecting all groups
+      setallButtonIsPressed(true);
+      tempArray = [];
+      for (let i = 0; i < numButtons; i += 1) {
+        tempArray.push(i);
+        idolGroups[i].isPressed = true;
+      }
+    }
+    setSelectedGroups(tempArray);
+  };
+
+  const handleButtonPress = (index) => {
+    const selectedIndex = selectedGroups.indexOf(index);
+    if (selectedIndex === -1) {
+      // if clicked idolGroup is newly selected idolGroup:
+      // add to selectedGroups and mark as pressed
+      setSelectedGroups([...selectedGroups, index]);
+      idolGroups[index].isPressed = true;
+    } else {
+      // if clicked idolGroup is already in selectedGroups:
+      // remove from selectedGroups and mark as un-pressed
+      const newSelectedGroups = [...selectedGroups];
+      newSelectedGroups.splice(selectedIndex, 1);
+      setSelectedGroups(newSelectedGroups);
+      idolGroups[index].isPressed = false;
+
+      // if All button is pressed, un-press it
+      if (allButtonIsPressed) {
+        setallButtonIsPressed(false);
+      }
+    }
+  };
+
+  const renderIdolGroupButtons = () => {
+    const buttons = [];
     buttons.push(
-      //   <View key={i} style={styles.row}>
-      <View key={i} style={basicStyles.idolGroupButton}>
-        <Button
-          title={`Button ${i + 1}`}
-          //   onPress={() => handleButtonPress(i)}
+      // "All" button
+      <View key={-1} style={idolGroupSelectStyles.container}>
+        <IdolGroupCard
+          buttonText={"All"}
+          onPress={() => handleAllButtonPress()}
+          isPressed={allButtonIsPressed}
         />
-        {/* {i + 1 < numButtons && (
-          <Button
-            title={`Button ${i + 2}`}
-            onPress={() => handleButtonPress(i + 1)}
-          />
-        )} */}
       </View>
     );
-  }
-  return buttons;
-};
+    // add idolGroup buttons
+    for (let i = 0; i < numButtons; i += 1) {
+      buttons.push(
+        <View key={i} style={idolGroupSelectStyles.container}>
+          <IdolGroupCard
+            imageSource={idolGroups[i].sourcePath}
+            buttonText={idolGroups[i].name}
+            // isSelected={isPressed}
+            onPress={() => handleButtonPress(i)}
+            isPressed={idolGroups[i].isPressed}
+          />
+        </View>
+      );
+    }
+    return buttons;
+  };
 
-const handleButtonPress = (index) => {
-  //   const { selectedGroups, setSelectedGroups } = useSelectedGroups();
-  const selectedIndex = selectedGroups.indexOf(index);
-  if (selectedIndex === -1) {
-    // if newly selected idol group
-    setSelectedGroups([...selectedGroups, index]);
-  } else {
-    const newSelectedGroups = [...selectedGroups];
-    newSelectedGroups.splice(selectedIndex, 1);
-    setSelectedGroups(newSelectedGroups);
-  }
-};
-
-export default function IdolGroupSelect2() {
-  //   const navigation = useNavigation();
-  //   const { selectedGroups, setSelectedGroups } = useSelectedGroups();
-  const [selectedGroups, setSelectedGroups] = useState([]);
   return (
-    <View style={basicStyles.container}>
+    <View style={idolGroupSelectStyles.mainContainer}>
       <LinearGradient
         colors={GRADIENT_COLOR_RANGE}
         start={{ x: 0, y: 0.75 }}
         end={{ x: 0, y: 1 }}
-        style={basicStyles.gradient}
+        style={idolGroupSelectStyles.gradient}
       >
-        {/* Header Text */}
-        <Text style={basicStyles.headerText}>Select Your Own Pool</Text>
+        <Text style={idolGroupSelectStyles.headerText}>
+          Select Your Own Pool
+        </Text>
 
         {/* create Idol Group buttons */}
         {renderIdolGroupButtons()}
 
-        {/* Button */}
-        <View style={basicStyles.runKatchButton}>
+        {/* Run Katch button: send selectedGroups list to next page */}
+        <View style={idolGroupSelectStyles.runKatchButton}>
           <Button
             titleStyle={{
               color: "#FFFFFF",
             }}
             title="Run Katch"
-            // buttonStyle={{
-            //   backgroundColor: "#9A2AA4",
-            //   borderRadius: 4,
-            //   margin: 5,
-            // }}
-            // onPress={() => navigation.navigate("IdolGroupSelect")}
             onPress={() => console.log(selectedGroups)}
           />
         </View>
