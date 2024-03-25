@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, PanResponder } from "react-native";
 import IdolSelectCard from "../components/IdolSelectCard";
-import { idolSelectStyles } from "./styles/idolSelectStyle";
 
-const SWIPE_THRESHOLD = -25;
 const idolList = [
   {
     name: "lesserafim",
@@ -29,25 +26,6 @@ export default function IdolSelect(props) {
   const [filePath, setFilePath] = useState();
   const [selectedGroups, setSelectedGroups] = useState([]);
 
-  // Gesture handling for vertical swiping
-  const pan = useState(new Animated.ValueXY())[0];
-  const panResponder = useState(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event([
-        null,
-        { dy: pan.x }, // Horizontal movement only
-      ]),
-      onPanResponderRelease: (e, gesture) => {
-        if (gesture.dx < SWIPE_THRESHOLD) {
-          setIdolIndex((prevIndex) => prevIndex + 1);
-        } else {
-          Animated.spring(pan, { toValue: { x: 0, y: 0 } }).start();
-        }
-      },
-    })
-  )[0];
-
   const fetchData = () => {
     // Perform your data fetching or any other actions here
     // For example, fetch data from an API
@@ -67,14 +45,10 @@ export default function IdolSelect(props) {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
+      const idolInfo = idolList.at(idolIndex);
+      setIdolName(idolInfo.name);
+      setFilePath(idolInfo.filePath);
       setSelectedGroups([...selectedGroups, idolIndex - 1]);
-      if (idolIndex > idolList.length - 1) {
-        console.log("next page");
-      } else {
-        const idolInfo = idolList.at(idolIndex);
-        setIdolName(idolInfo.name);
-        setFilePath(idolInfo.filePath);
-      }
     }
   }, [idolIndex]);
 
@@ -82,16 +56,17 @@ export default function IdolSelect(props) {
     console.log(selectedGroups);
   }, [selectedGroups]); // Log selectedGroups whenever it changes
 
+  const handleRightSwipe = () => {
+    // increment index of Idol group list.
+    setIdolIndex((prevIndex) => prevIndex + 1);
+  };
+
   return (
-    <Animated.View
-      style={idolSelectStyles.container}
-      {...panResponder.panHandlers}
-    >
-      <IdolSelectCard
-        index={idolIndex}
-        idolName={idolName}
-        filePath={filePath}
-      />
-    </Animated.View>
+    <IdolSelectCard
+      index={idolIndex}
+      idolName={idolName}
+      filePath={filePath}
+      onRightSwipe={handleRightSwipe}
+    />
   );
 }
