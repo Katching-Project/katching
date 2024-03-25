@@ -1,0 +1,11 @@
+I was born in 4/8/1998 and my name is Chang Hun Lee. I want to know Chinese horoscope and oriential score between me and the following people: [Jungkok who was born in 9/1/1990, Minjim who was born in 3/1/2014, Hanniop who was born in 6/25/2004, Haerin who was born in 9/12/2006, Danielle who was born in 5/16/2005, Hyeino who was born in 11/13/2008, Chaewon who was born in 6/7/1998, Eunchae who was born in 6/5/2008, RM who was born in 6/13/1997]. 
+
+Categories = [Personality Dynamics, Communication, Emotional Compatibility, Shared Goals and Values, Challenges]
+
+With the best scorer, summarize each category defined above in 4 sentences along with a score out of 100 for each category. Also give me the average score for all categories.
+With the second best scorer, summarize each category defined above in 4 sentences along with a score out of 100 for each category. Also give me the average score for all categories.
+With the third best scorer, summarize each category defined above in 4 sentences along with a score out of 100 for each category. Also give me the average score for all categories.
+With the fourth best scorer, summarize each category defined above in 4 sentences along with a score out of 100 for each category. Also give me the average score for all categories.
+With the fifth best scorer, summarize each category defined above in 4 sentences along with a score out of 100 for each category. Also give me the average score for all categories.
+
+Give the result in JSON format. We are curious about four pillars of destiny. The "summary" needs to be very specified in more than 3 sentences and less than 5 sentences.
