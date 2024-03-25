@@ -6,6 +6,14 @@ export const basicStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  centerPosition: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
+    flex: 1,
+    ...this.centerPosition,
+  },
   gradient: {
     flex: 1,
     width: "100%",
