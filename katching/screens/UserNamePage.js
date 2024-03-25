@@ -1,7 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
-import { Animated, PanResponder, Text, TextInput, View } from "react-native";
+import {
+  Animated,
+  Button,
+  PanResponder,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { basicStyles } from "./styles/basicStyles";
 
 const GRADIENT_COLOR_RANGE = ["#EE64D5", "#FAA8E8", "#FFF6FD"];
@@ -83,7 +90,6 @@ export default function UserNamePage() {
             onChangeText={handleLastNameInputValue}
           />
         </View>
-
         {/* Swiping Area */}
         <Animated.View
           style={basicStyles.swipeArea}
@@ -91,6 +97,15 @@ export default function UserNamePage() {
         >
           <Text style={basicStyles.swipeText}>Swipe up</Text>
         </Animated.View>
+        {/* Button */}
+        <Button
+          title="Swipe Up"
+          onPress={() => navigation.navigate("IdolGroupSelect")}
+        />
+        <Button
+          title="IdolSelect"
+          onPress={() => navigation.navigate("IdolSelect")}
+        />
       </LinearGradient>
     </View>
   );
