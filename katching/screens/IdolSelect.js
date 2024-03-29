@@ -4,17 +4,15 @@ import IdolSelectCard from "../components/IdolSelectCard";
 const idolList = [
   {
     name: "lesserafim",
-    filePath: "/Users/yuhyunchung/workplace/katching/katching/assets/girl1.jpg",
+    sourcePath: require("../assets/girl1.jpg"),
   },
   {
     name: "haerin",
-    filePath:
-      "/Users/yuhyunchung/workplace/katching/katching/assets/haerin.jpeg",
+    sourcePath: require("../assets/haerin.jpeg"),
   },
   {
     name: "minji",
-    filePath:
-      "/Users/yuhyunchung/workplace/katching/katching/assets/minji.jpeg",
+    sourcePath: require("../assets/minji.jpeg"),
   },
 ];
 
@@ -22,7 +20,7 @@ export default function IdolSelect(props) {
   const isInitialMount = useRef(true);
   const [idolIndex, setIdolIndex] = useState(0);
   const [idolName, setIdolName] = useState();
-  const [filePath, setFilePath] = useState();
+  const [sourcePath, setSourcePath] = useState();
   const [selectedGroups, setSelectedGroups] = useState([]);
 
   const fetchData = () => {
@@ -34,20 +32,25 @@ export default function IdolSelect(props) {
   useEffect(() => {
     // Code to be executed after the component has been mounted
     fetchData(); // Call your function here
+    const idolInfo = idolList.at(0);
     setIdolName("minji");
-    setFilePath(
-      "/Users/yuhyunchung/workplace/katching/katching/assets/girl1.jpg"
-    );
+    setSourcePath(idolInfo.sourcePath);
   }, []); // Passing an empty dependency array ensures that this effect runs only once, after the initial render
 
   useEffect(() => {
+    console.log(idolIndex);
+
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      const idolInfo = idolList.at(idolIndex);
-      setIdolName(idolInfo.name);
-      setFilePath(idolInfo.filePath);
-      setSelectedGroups([...selectedGroups, idolIndex - 1]);
+      if (idolIndex + 1 > idolList.length) {
+        console.log("next page");
+      } else {
+        const idolInfo = idolList.at(idolIndex);
+        setIdolName(idolInfo.name);
+        setSourcePath(idolInfo.sourcePath);
+        setSelectedGroups([...selectedGroups, idolIndex - 1]);
+      }
     }
   }, [idolIndex]);
 
@@ -64,7 +67,7 @@ export default function IdolSelect(props) {
     <IdolSelectCard
       index={idolIndex}
       idolName={idolName}
-      filePath={filePath}
+      sourcePath={sourcePath}
       onRightSwipe={handleRightSwipe}
     />
   );
