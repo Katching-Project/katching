@@ -4,8 +4,7 @@ import IdolSelectCard from "../components/IdolSelectCard";
 const idolList = [
   {
     name: "lesserafim",
-    filePath:
-      "/Users/yuhyunchung/workplace/katching/katching/assets/lesserafim.jpg",
+    filePath: "/Users/yuhyunchung/workplace/katching/katching/assets/girl1.jpg",
   },
   {
     name: "haerin",
@@ -37,7 +36,7 @@ export default function IdolSelect(props) {
     fetchData(); // Call your function here
     setIdolName("minji");
     setFilePath(
-      "/Users/yuhyunchung/workplace/katching/katching/assets/lesserafim.jpg"
+      "/Users/yuhyunchung/workplace/katching/katching/assets/girl1.jpg"
     );
   }, []); // Passing an empty dependency array ensures that this effect runs only once, after the initial render
 
