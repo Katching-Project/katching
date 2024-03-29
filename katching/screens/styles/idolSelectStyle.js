@@ -7,6 +7,9 @@ export const idolSelectStyles = StyleSheet.create({
     fontStyle: "italic",
     color: "white",
   },
+  container: {
+    backgroundColor: "#9A2AA4",
+  },
   idolNameContainer: {
     ...basicStyles.centerPosition,
     height: "5%",
