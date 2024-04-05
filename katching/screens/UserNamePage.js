@@ -21,8 +21,8 @@ export default function UserNamePage() {
     setLastNameInputValue(text);
   };
 
-  const navigateToIdolGroupSelect = () => {
-    navigation.navigate("IdolGroupSelect");
+  const navigateToBirthdayPage = () => {
+    navigation.navigate("BirthdayPage");
   };
 
   // Gesture handling for vertical swiping
@@ -36,7 +36,7 @@ export default function UserNamePage() {
       ]),
       onPanResponderRelease: (e, gesture) => {
         if (gesture.dy < SWIPE_THRESHOLD) {
-          navigateToIdolGroupSelect();
+          navigateToBirthdayPage();
         } else {
           Animated.spring(pan, { toValue: { x: 0, y: 0 } }).start();
         }

@@ -38,7 +38,7 @@ export const basicStyles = StyleSheet.create({
     bottom: 0, // Position at the bottom of the screen
     left: 0,
     right: 0,
-    height: "30%",
+    height: "17%",
     justifyContent: "flex-end", // Set swiping area to the end of the screen
     alignItems: "center",
     paddingVertical: "10%",
